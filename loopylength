@@ -1,0 +1,12 @@
+//zreolength
+
+#include<stdio.h>
+
+main()
+{
+  for(;;)
+  { printf("eating your ram and cycles!\n");
+  }
+}
+
+
