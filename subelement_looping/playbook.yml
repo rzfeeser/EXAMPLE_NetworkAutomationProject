@@ -1,0 +1,24 @@
+---
+- name: playbook run
+  hosts: localhost
+  connection: local
+
+  vars_files:
+    - network_topology.yml
+
+  tasks:
+    # start creating veths - for routers
+    - name: Pull in code to create veths
+      ansible.builtin.include_tasks:
+        file: veth_creation.yml
+      with_subelements:
+        - "{{ network.routers }}"  # item.0
+        - adjacent  # item.1
+          
+    # start creating veths - for hosts
+    - name: Pull in code to create veths
+      ansible.builtin.include_tasks:
+        file: veth_creation.yml
+      with_subelements:
+        - "{{ network.hosts }}"  # item.0
+        - adjacent  # item.1
